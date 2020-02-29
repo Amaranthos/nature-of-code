@@ -1,43 +1,19 @@
-// @ts-check
-const canvas = document.getElementById("render");
-/**
- * @type CanvasRenderingContext2D
- */
-const ctx = canvas.getContext("2d");
+import { ctx } from "./context";
 
 const drawFrame = () => {
-  clear(ctx, canvas);
+  const { context, clear } = ctx;
+  clear();
 
-  ctx.lineWidth = 10;
-  ctx.strokeRect(75, 140, 150, 110);
+  context.lineWidth = 10;
+  context.strokeRect(75, 140, 150, 110);
 
-  ctx.fillRect(130, 190, 40, 60);
-  ctx.moveTo(50, 140);
-  ctx.lineTo(150, 60);
-  ctx.lineTo(250, 140);
-  ctx.closePath();
-  ctx.stroke();
+  context.fillRect(130, 190, 40, 60);
+  context.moveTo(50, 140);
+  context.lineTo(150, 60);
+  context.lineTo(250, 140);
+  context.closePath();
+  context.stroke();
 
   requestAnimationFrame(drawFrame);
 };
 requestAnimationFrame(drawFrame);
-
-/**
- * @param {CanvasRenderingContext2D} ctx
- */
-const clear = ctx => {
-  resizeCanvas(ctx.canvas);
-  ctx.clearRect(0, 0, ctx.canvas.height, ctx.canvas.width);
-};
-
-/**
- *
- * @param {HTMLCanvasElement} canvas
- */
-const resizeCanvas = canvas => {
-  const { clientWidth, clientHeight } = canvas;
-  if (canvas.width !== clientWidth || canvas.height !== clientHeight) {
-    canvas.width = clientWidth;
-    canvas.height = clientHeight;
-  }
-};
