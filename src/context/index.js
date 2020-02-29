@@ -1,4 +1,5 @@
-import { clear, resize } from "./clear";
+import { clear } from "./clear";
+import { resize } from "./resize";
 import { point } from "./draw";
 
 const ctx = (() => {
