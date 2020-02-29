@@ -14,27 +14,14 @@ export class Walker {
   }
 
   draw() {
-    ctx.draw.point(this.x, this.y, 2);
+    ctx.draw.point(this.x, this.y, 1);
   }
 
   /**
    * Makes a step in a random direction
    */
   step() {
-    const choice = Random.int(4);
-    switchcase({
-      0: () => {
-        this.x += 1;
-      },
-      1: () => {
-        this.x -= 1;
-      },
-      2: () => {
-        this.y += 1;
-      },
-      3: () => {
-        this.y -= 1;
-      }
-    })()(choice);
+    this.x += Random.range(-1, 1);
+    this.y += Random.range(-1, 1);
   }
 }

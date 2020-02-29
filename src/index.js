@@ -1,5 +1,6 @@
 import { ctx } from "./context";
 import { Walker } from "./walker";
+import { Random } from "./random";
 
 const walker = new Walker(ctx.height, ctx.width);
 

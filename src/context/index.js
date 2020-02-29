@@ -8,13 +8,10 @@ const ctx = (() => {
    */
   const context = document.getElementById("render").getContext("2d");
 
-  const height = context.canvas.height;
-  const width = context.canvas.width;
-
   return {
     context,
-    height,
-    width,
+    height: context.canvas.clientHeight,
+    width: context.canvas.clientWidth,
     clear: clear(context),
     resize: resize(context.canvas),
     draw: { point: point(context) }
