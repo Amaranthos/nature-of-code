@@ -1,4 +1,5 @@
-import { clear } from "./clear";
+import { clear, resize } from "./clear";
+import { point } from "./draw";
 
 const ctx = (() => {
   /**
@@ -11,9 +12,11 @@ const ctx = (() => {
 
   return {
     context,
-    clear: clear(context),
     height,
-    width
+    width,
+    clear: clear(context),
+    resize: resize(context.canvas),
+    draw: { point: point(context) }
   };
 })();
 
