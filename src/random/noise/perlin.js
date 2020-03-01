@@ -2,76 +2,62 @@ import { hash, hashMask } from "./hash";
 import { smooth } from "./smooth";
 import { math } from "../../math";
 
-const dot = ([vx, vy], x, y) => vx * x + vy * y;
+export const perlin = (x, y, z) => {
+  const [ux, uy, uz] = [x, y, z].map(v => Math.floor(v) & hashMask);
 
-const normalize = v => {
-  const length = Math.sqrt(v.reduce((s, e) => (s += e * e)));
-  return length === 0 ? [0, 0, 0] : v.map(e => e / length);
+  const [rx, ry, rz] = [
+    x - Math.floor(x),
+    y - Math.floor(y),
+    z - Math.floor(z)
+  ];
+
+  const [fx, fy, fz] = [rx, ry, rz].map(smooth);
+
+  const a = hash[ux] + uy,
+    aa = hash[a] + uz,
+    ab = hash[a + 1] + uz,
+    b = hash[ux + 1] + uy,
+    ba = hash[b] + uz,
+    bb = hash[b + 1] + uz;
+
+  return scale(
+    lerp(
+      fz,
+      lerp(
+        fy,
+        lerp(
+          fx,
+          gradient(hash[aa], rx, ry, rz),
+          gradient(hash[ba], rx - 1, ry, rz)
+        ),
+        lerp(
+          fx,
+          gradient(hash[ab], rx, ry - 1, rz),
+          gradient(hash[bb], rx - 1, ry - 1, rz)
+        )
+      ),
+      lerp(
+        fy,
+        lerp(
+          fx,
+          gradient(hash[aa + 1], rx, ry, rz - 1),
+          gradient(hash[ba + 1], rx - 1, ry, rz - 1)
+        ),
+        lerp(
+          fx,
+          gradient(hash[ab + 1], rx, ry - 1, rz - 1),
+          gradient(hash[bb + 1], rx - 1, ry - 1, rz - 1)
+        )
+      )
+    )
+  );
 };
 
-const gradients1D = [1, -1];
-const gradientsMask1D = 1;
-
-const gradients2D = [
-  [1, 0],
-  [-1, 0],
-  [0, 1],
-  [0, -1],
-  normalize([1, 1]),
-  normalize([-1, 1]),
-  normalize([1, -1]),
-  normalize([-1, -1])
-];
-const gradientsMask2D = 7;
-
-const oneD = (px, frequency = 1) => {
-  const fx = px * frequency;
-  let i0 = Math.floor(fx);
-  const t0 = fx - i0;
-  const t1 = t0 - 1;
-  i0 &= hashMask;
-
-  const i1 = i0 + 1;
-
-  const g0 = gradients1D[hash[i0] & gradientsMask1D];
-  const g1 = gradients1D[hash[i1] & gradientsMask1D];
-
-  const value = math.lerp(g0 * t0, g1 * t1, smooth(t0));
-  return value + 0.5;
+const lerp = (t, a, b) => a + t * (b - a);
+const scale = v => (1 + v) / 2;
+const gradient = (h, x, y, z) => {
+  const hh = h & 15;
+  const u = hh < 8 ? x : y,
+    v = hh < 4 ? y : hh == 12 || hh == 14 ? x : z;
+  return ((hh & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 };
-
-const twoD = (px, py, frequency = 1) => {
-  const [fx, fy] = [px, py].map(v => v * frequency);
-  let [ix0, iy0] = [fx, fy].map(v => Math.floor(v));
-
-  const [tx0, ty0] = [fx - ix0, fy - iy0];
-  const [tx1, ty1] = [tx0 - 1, ty0 - 1];
-
-  ix0 &= hashMask;
-  iy0 &= hashMask;
-
-  const [ix1, iy1] = [ix0 + 1, iy0 + 1];
-
-  const [h0, h1] = [hash[ix0], hash[ix1]];
-
-  const g00 = gradients2D[hash[h0 + iy0] & gradientsMask2D];
-  const g10 = gradients2D[hash[h1 + iy0] & gradientsMask2D];
-  const g01 = gradients2D[hash[h0 + iy1] & gradientsMask2D];
-  const g11 = gradients2D[hash[h1 + iy1] & gradientsMask2D];
-
-  const v00 = dot(g00, tx0, ty0);
-  const v10 = dot(g10, tx1, ty0);
-  const v01 = dot(g01, tx0, ty1);
-  const v11 = dot(g11, tx1, ty1);
-
-  const tx = smooth(tx0);
-  const ty = smooth(ty0);
-  const value =
-    math.lerp(math.lerp(v00, v10, tx), math.lerp(v01, v11, tx), ty) *
-    Math.SQRT2;
-  return value * 0.5 + 0.5;
-};
-
-const threeD = (px, py, pz, frequency = 1) => {};
-
-export const perlin = { oneD, twoD, threeD };
