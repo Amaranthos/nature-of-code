@@ -23,12 +23,11 @@ const hash = [
 ];
 
 const hashMask = 255;
-const value = (x, frequency = 1) => {
-  let i = x * frequency;
-  i = Math.floor(i);
-  i &= hashMask;
-
-  return hash[i] * (1 / hashMask);
+const value1D = (px, frequency = 1) => {
+  const x = mapCoord(px, frequency, hashMask);
+  return hash[x] * (1 / hashMask);
 };
 
-export const noise = { value, perlin };
+const mapCoord = (v, freq, hashMask) => Math.floor(v * freq) & hashMask;
+
+export const noise = { value1D, perlin };
