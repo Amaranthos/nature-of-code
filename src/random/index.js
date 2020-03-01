@@ -26,7 +26,7 @@ const inclusive_range = (min, max) =>
  * @param {number} mean
  * @param {number} stdDev
  */
-const distribution = (mean, stdDev) => Math.random() * stdDev + mean;
+const distribution = (mean = 0, stdDev = 1) => Math.random() * stdDev + mean;
 
 const monte_carlo = () => {
   while (true) {
