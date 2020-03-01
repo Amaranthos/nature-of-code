@@ -2,7 +2,7 @@ import { ctx } from "./context";
 import { Walker } from "./walker";
 import { Random } from "./random";
 
-const walker = new Walker(ctx.height, ctx.width);
+const walker = new Walker(ctx.width, ctx.height);
 
 const drawFrame = () => {
   const { context, clear, resize } = ctx;
