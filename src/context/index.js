@@ -10,8 +10,8 @@ const ctx = (() => {
 
   return {
     context,
-    height: context.canvas.clientHeight,
-    width: context.canvas.clientWidth,
+    height: context.canvas.height,
+    width: context.canvas.width,
     clear: clear(context),
     resize: resize(context.canvas),
     draw: { point: point(context) }
