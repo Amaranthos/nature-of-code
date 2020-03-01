@@ -1,3 +1,5 @@
+import { noise } from "./noise";
+
 /**
  * Returns an integer in the range [0, max)
  * @param {number} max
@@ -40,5 +42,6 @@ export const random = {
   range,
   inclusive_range,
   distribution,
-  monte_carlo
+  monte_carlo,
+  noise
 };
