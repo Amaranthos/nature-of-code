@@ -1,23 +1,36 @@
 /**
- * Returns random integer between 0 and max
+ * Returns an integer in the range [0, max)
  * @param {number} max
  * @returns {number}
  */
 const int = max => Math.floor(Math.random() * max);
 
 /**
- * Returns random float between min and max
+ * Returns a float in the range [min, max)
  * @param {number} min
  * @param {number} max
  * @returns {number}
  */
 const range = (min, max) => Math.random() * (max - min) + min;
 
+/**
+ * Returns an integer in the range [min, max]
+ * @param {number} min
+ * @param {number} max
+ */
 const inclusive_range = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
+
+/**
+ * Returns a float with a gaussian distribution with mean and stdDev
+ * @param {number} mean
+ * @param {number} stdDev
+ */
+const distribution = (mean, stdDev) => Math.random() * stdDev + mean;
 
 export const Random = {
   int,
   range,
-  inclusive_range
+  inclusive_range,
+  distribution
 };
