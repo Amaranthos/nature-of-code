@@ -11,6 +11,8 @@ export class Walker {
   constructor(width, height) {
     this.x = width / 2;
     this.y = height / 2;
+
+    this.dt = 0;
   }
 
   draw() {
@@ -21,8 +23,11 @@ export class Walker {
    * Makes a step in a random direction
    */
   step() {
-    const dist = 1 * random.monte_carlo();
+    const dist = random.noise.perlin(this.dt, 0, 0) * 3;
+
     this.x += random.inclusive_range(-1, 1) * dist;
     this.y += random.inclusive_range(-1, 1) * dist;
+
+    this.dt += 0.1;
   }
 }
