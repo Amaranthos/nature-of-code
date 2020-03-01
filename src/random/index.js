@@ -28,9 +28,17 @@ const inclusive_range = (min, max) =>
  */
 const distribution = (mean, stdDev) => Math.random() * stdDev + mean;
 
+const monte_carlo = () => {
+  while (true) {
+    const rand = Math.random();
+    if (Math.random() < rand) return rand;
+  }
+};
+
 export const Random = {
   int,
   range,
   inclusive_range,
-  distribution
+  distribution,
+  monte_carlo
 };
