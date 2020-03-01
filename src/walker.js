@@ -1,4 +1,4 @@
-import { Random } from "./random";
+import { random } from "./random";
 import { switchcase } from "./utility";
 import { ctx } from "./context";
 
@@ -21,8 +21,8 @@ export class Walker {
    * Makes a step in a random direction
    */
   step() {
-    const dist = Random.distribution(0, 1);
-    this.x += Random.inclusive_range(-1, 1) * dist;
-    this.y += Random.inclusive_range(-1, 1) * dist;
+    const dist = 1 * random.monte_carlo();
+    this.x += random.inclusive_range(-1, 1) * dist;
+    this.y += random.inclusive_range(-1, 1) * dist;
   }
 }

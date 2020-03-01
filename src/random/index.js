@@ -35,7 +35,7 @@ const monte_carlo = () => {
   }
 };
 
-export const Random = {
+export const random = {
   int,
   range,
   inclusive_range,
