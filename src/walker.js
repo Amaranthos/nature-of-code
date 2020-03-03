@@ -1,6 +1,6 @@
 import { random } from "./random";
-import { switchcase } from "./utility";
 import { ctx } from "./context";
+import { Vec } from "./vec";
 
 /**
  *
@@ -9,10 +9,8 @@ import { ctx } from "./context";
  */
 export class Walker {
   constructor(width, height) {
-    this.x = width / 2;
-    this.y = height / 2;
-
-    this.dt = 0;
+    this.position = new Vec(width / 2, height / 2);
+    this.velocity = this.dt = 0;
   }
 
   draw() {
@@ -25,8 +23,8 @@ export class Walker {
   step() {
     const dist = random.noise.perlin(this.dt, 0, 0) * 3;
 
-    this.x += random.inclusive_range(-1, 1) * dist;
-    this.y += random.inclusive_range(-1, 1) * dist;
+    this.x += random.inclusiveRange(-1, 1) * dist;
+    this.y += random.inclusiveRange(-1, 1) * dist;
 
     this.dt += 0.1;
   }

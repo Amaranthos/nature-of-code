@@ -41,7 +41,7 @@ const twoD = (px, py, frequency = 1) => {
 };
 
 const threeD = (px, py, pz, frequency = 1) => {
-  const [fx, fy, fz] = [px, py, fz].map(v => v * frequency);
+  const [fx, fy, fz] = [px, py, pz].map(v => v * frequency);
 
   let [ix0, iy0, iz0] = [fx, fy, fz].map(v => Math.floor(v));
 

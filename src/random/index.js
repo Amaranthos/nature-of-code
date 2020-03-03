@@ -20,7 +20,7 @@ const range = (min, max) => Math.random() * (max - min) + min;
  * @param {number} min
  * @param {number} max
  */
-const inclusive_range = (min, max) =>
+const inclusiveRange = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
 /**
@@ -30,7 +30,7 @@ const inclusive_range = (min, max) =>
  */
 const distribution = (mean = 0, stdDev = 1) => Math.random() * stdDev + mean;
 
-const monte_carlo = () => {
+const monteCarlo = () => {
   while (true) {
     const rand = Math.random();
     if (Math.random() < rand) return rand;
@@ -40,8 +40,8 @@ const monte_carlo = () => {
 export const random = {
   int,
   range,
-  inclusive_range,
+  inclusiveRange,
   distribution,
-  monte_carlo,
+  monteCarlo,
   noise
 };

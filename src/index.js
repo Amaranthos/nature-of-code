@@ -25,7 +25,6 @@ const drawFrame = () => {
   if (position.x + radius > width || position.x - radius < 0) velocity.x *= -1;
   if (position.y + radius > height || position.y - radius < 0) velocity.y *= -1;
 
-  context.pa;
   context.beginPath();
   context.arc(position.x, position.y, radius, 0, 2 * Math.PI);
   context.fillStyle = "#494949";

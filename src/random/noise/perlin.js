@@ -1,6 +1,5 @@
 import { hash, hashMask } from "./hash";
 import { smooth } from "./smooth";
-import { math } from "../../math";
 
 export const perlin = (x, y, z) => {
   const [ux, uy, uz] = [x, y, z].map(v => Math.floor(v) & hashMask);
@@ -13,12 +12,12 @@ export const perlin = (x, y, z) => {
 
   const [fx, fy, fz] = [rx, ry, rz].map(smooth);
 
-  const a = hash[ux] + uy,
-    aa = hash[a] + uz,
-    ab = hash[a + 1] + uz,
-    b = hash[ux + 1] + uy,
-    ba = hash[b] + uz,
-    bb = hash[b + 1] + uz;
+  const a = hash[ux] + uy;
+  const aa = hash[a] + uz;
+  const ab = hash[a + 1] + uz;
+  const b = hash[ux + 1] + uy;
+  const ba = hash[b] + uz;
+  const bb = hash[b + 1] + uz;
 
   return scale(
     lerp(
@@ -57,7 +56,7 @@ const lerp = (t, a, b) => a + t * (b - a);
 const scale = v => (1 + v) / 2;
 const gradient = (h, x, y, z) => {
   const hh = h & 15;
-  const u = hh < 8 ? x : y,
-    v = hh < 4 ? y : hh == 12 || hh == 14 ? x : z;
-  return ((hh & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+  const u = hh < 8 ? x : y;
+  const v = hh < 4 ? y : hh === 12 || hh === 14 ? x : z;
+  return ((hh & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v);
 };

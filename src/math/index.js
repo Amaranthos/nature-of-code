@@ -13,9 +13,9 @@ const lerp = (start, end, step) => (1.0 - step) * start + step * end;
  * @param {number} min
  * @param {number} max
  */
-const map_range = (x, [a, b], [c, d]) => ((x - a) / (b - a)) * (d - c) + c;
+const mapRange = (x, [a, b], [c, d]) => ((x - a) / (b - a)) * (d - c) + c;
 
 export const math = {
   lerp,
-  map_range
+  mapRange: mapRange
 };
