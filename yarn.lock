@@ -114,6 +114,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-create-class-features-plugin@npm:^7.8.3":
+  version: 7.8.6
+  resolution: "@babel/helper-create-class-features-plugin@npm:7.8.6"
+  dependencies:
+    "@babel/helper-function-name": ^7.8.3
+    "@babel/helper-member-expression-to-functions": ^7.8.3
+    "@babel/helper-optimise-call-expression": ^7.8.3
+    "@babel/helper-plugin-utils": ^7.8.3
+    "@babel/helper-replace-supers": ^7.8.6
+    "@babel/helper-split-export-declaration": ^7.8.3
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 2/a481490b68586d63ad9182d54a210d6ae3fbaae08c456a80d38ebf973089962bfac9ee028e3aaaa78a82ec12ec0c870c4d99b1fad11618ad3688387935d12fae
+  languageName: node
+  linkType: hard
+
 "@babel/helper-create-regexp-features-plugin@npm:^7.8.3":
   version: 7.8.6
   resolution: "@babel/helper-create-regexp-features-plugin@npm:7.8.6"
@@ -332,6 +348,18 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 2/4844ede310563e7f030c58217b0b33bb96d17a698b689f5d3b5fbca9245802061afe68dd025a9ea5d243765c180f470c1a2e145afd3c274ac20b318c763027c3
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-proposal-class-properties@npm:^7.8.3":
+  version: 7.8.3
+  resolution: "@babel/plugin-proposal-class-properties@npm:7.8.3"
+  dependencies:
+    "@babel/helper-create-class-features-plugin": ^7.8.3
+    "@babel/helper-plugin-utils": ^7.8.3
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 2/09072d267cd00c89057cab37817b2bc8dd397e56f849a63596aa40dc0962b4daedb2c1fc0b8f7b842baffe0042b21a1758f3b9c53e1bfcc9345b7db3336220aa
   languageName: node
   linkType: hard
 
@@ -6092,6 +6120,7 @@ fsevents@^2.1.2:
   resolution: "nature-of-code@workspace:."
   dependencies:
     "@babel/core": ^7.8.6
+    "@babel/plugin-proposal-class-properties": ^7.8.3
     "@babel/preset-env": ^7.8.6
     "@types/jest": ^25.1.3
     babel-jest: ^25.1.0
