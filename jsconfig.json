@@ -5,6 +5,11 @@
   },
   "checkJs": true,
   "typeAcquisition": {
-    "include": ["jest"]
-  }
+    "include": [
+      "jest"
+    ]
+  },
+  "exclude": [
+    "dist/*"
+  ]
 }
