@@ -11,13 +11,13 @@ export class Mover {
   constructor() {
     this.position = new Vec(width / 2, height / 2);
     this.velocity = Vec.zero(2);
-    this.acceleration = new Vec(-0.001, 0.01);
+    this.acceleration = Vec.zero(2);
   }
 
   update = () => {
-    if (this.velocity.magnitude() < 10) {
-      this.velocity = this.velocity.add(this.acceleration);
-    }
+    this.acceleration = Vec.random();
+    this.velocity = this.velocity.add(this.acceleration);
+    this.velocity = this.velocity.limit(10);
     this.position = this.position.add(this.velocity);
 
     if (this.position.x > width) this.position.x = 0;

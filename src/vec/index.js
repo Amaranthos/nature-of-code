@@ -1,3 +1,5 @@
+import { math } from "../math";
+
 export class Vec {
   constructor(...elements) {
     this.v = [].concat(elements || []).flat();
@@ -27,10 +29,19 @@ export class Vec {
   multiply = s => new Vec(this.v.map(v => v * s));
   divide = s => new Vec(this.v.map(v => v / s));
 
-  magnitude = () => Math.sqrt(this.v.reduce((s, v) => s + v * v, 0));
+  magnitude = () => Math.sqrt(this.magnitudeSquared());
+  magnitudeSquared = () => this.v.reduce((s, v) => s + v * v, 0);
+
   normalized = () => {
     const magnitude = this.magnitude();
     return magnitude === 0 ? Vec.zero(this.v.length) : this.divide(magnitude);
+  };
+
+  limit = max => {
+    const magSq = this.magnitudeSquared();
+    return magSq > max * max
+      ? this.divide(Math.sqrt(magSq)).multiply(max)
+      : new Vec(this.v);
   };
 
   equals = vec =>
@@ -40,4 +51,8 @@ export class Vec {
   toString = () => `[${this.v.toString()}]`;
 
   static zero = (l = 2) => new Vec(Array(l).fill(0));
+  static fromAngle = (radians, magnitude = 1) =>
+    new Vec(magnitude * Math.cos(radians), magnitude * Math.sin(radians));
+
+  static random = () => Vec.fromAngle(Math.random() * Math.PI * 2);
 }
