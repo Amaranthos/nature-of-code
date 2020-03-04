@@ -14,7 +14,7 @@ export class Walker {
   }
 
   draw() {
-    ctx.draw.point(this.x, this.y, 2);
+    ctx.draw.point(this.position.x, this.position.y, 2);
   }
 
   /**
@@ -23,8 +23,8 @@ export class Walker {
   step() {
     const dist = random.noise.perlin(this.dt, 0, 0) * 3;
 
-    this.x += random.inclusiveRange(-1, 1) * dist;
-    this.y += random.inclusiveRange(-1, 1) * dist;
+    this.position.x += random.inclusiveRange(-1, 1) * dist;
+    this.position.y += random.inclusiveRange(-1, 1) * dist;
 
     this.dt += 0.1;
   }
