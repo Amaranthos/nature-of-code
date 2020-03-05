@@ -1,6 +1,7 @@
 import { clear } from "./clear";
 import { resize } from "./resize";
 import { point } from "./draw";
+import { initialise } from "./input";
 
 const ctx = (() => {
   /**
@@ -12,7 +13,8 @@ const ctx = (() => {
     context,
     clear: clear(context),
     resize: resize(context.canvas),
-    draw: { point: point(context) }
+    draw: { point: point(context) },
+    input: initialise(context.canvas)
   };
 })();
 
