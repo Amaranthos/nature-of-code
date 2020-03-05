@@ -15,7 +15,13 @@ export class Mover {
   }
 
   update = () => {
-    this.acceleration = Vec.random();
+    const {
+      input: { mouse }
+    } = ctx;
+
+    const direction = mouse.minus(this.position).normalized();
+
+    this.acceleration = direction.multiply(2);
     this.velocity = this.velocity.add(this.acceleration);
     this.velocity = this.velocity.limit(10);
     this.position = this.position.add(this.velocity);
