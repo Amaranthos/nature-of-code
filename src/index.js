@@ -2,31 +2,41 @@ import * as p5 from "p5";
 
 const inc = 0.01;
 
+let x = window.innerWidth * 0.5;
+let y = window.innerHeight * 0.5;
+
 new p5((s) => {
+  s.windowResized = function () {
+    s.resizeCanvas(window.innerWidth, window.innerHeight);
+    s.background(51);
+  };
+
   s.setup = function () {
-    s.createCanvas(400, 400);
+    s.createCanvas(window.innerWidth, window.innerHeight);
     s.pixelDensity(1);
+    s.background(51);
   };
 
   s.draw = function () {
-    s.loadPixels();
+    s.stroke(255);
+    s.strokeWeight(2);
+    s.point(x, y);
 
-    let yOff = 0;
-    for (let y = 0; y < s.width; y++) {
-      let xOff = 0;
-      for (let x = 0; x < s.width; x++) {
-        const idx = (x + y * s.width) * 4;
-        const r = s.noise(xOff, yOff) * 255;
-        s.pixels[idx + 0] = r;
-        s.pixels[idx + 1] = r;
-        s.pixels[idx + 2] = r;
-        s.pixels[idx + 3] = 255;
+    const r = s.floor(s.random(4));
 
-        xOff += inc;
-      }
-      yOff += inc;
+    switch (r) {
+      case 0:
+        x--;
+        break;
+      case 1:
+        x++;
+        break;
+      case 2:
+        y--;
+        break;
+      case 3:
+        y++;
+        break;
     }
-    s.updatePixels();
-    // s.noLoop();
   };
 });
