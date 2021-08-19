@@ -1,6 +1,7 @@
 import * as p5 from "p5";
 
-let xOffset = 0;
+let start = 0;
+const inc = 0.005;
 
 new p5((s) => {
   s.setup = function () {
@@ -10,10 +11,22 @@ new p5((s) => {
   s.draw = function () {
     s.background(51);
 
-    const x = s.map(s.noise(xOffset), 0, 1, 0, s.width);
+    s.stroke(255);
+    s.noFill();
 
-    s.ellipse(x, 200, 24, 24);
+    let xOff = start;
+    s.beginShape();
+    for (let x = 0; x < s.width; x++) {
+      s.stroke(255);
+      const y = s.noise(xOff) * s.height;
+      s.vertex(x, y);
 
-    xOffset += 0.01;
+      xOff += inc;
+    }
+    s.endShape();
+
+    start += inc;
+
+    // s.noLoop();
   };
 });
