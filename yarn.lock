@@ -1056,6 +1056,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/p5@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@types/p5@npm:1.3.0"
+  checksum: 01361083dff840ea4b597fd40416f6b4cb319578975ebbac6f964be668291731f252d28d45e63a011b5b972b0f130c72a7df92c80aa495a308b74b8437eeeb18
+  languageName: node
+  linkType: hard
+
 "abab@npm:^2.0.0":
   version: 2.0.5
   resolution: "abab@npm:2.0.5"
@@ -4556,6 +4563,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nature-of-code@workspace:."
   dependencies:
+    "@types/p5": ^1.3.0
     p5: ^1.4.0
     parcel: next
   languageName: unknown

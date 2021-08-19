@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
+            ["@types/p5", "npm:1.3.0"],
             ["p5", "npm:1.4.0"],
             ["parcel", "npm:2.0.0-rc.0"]
           ],
@@ -1355,6 +1356,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-16.6.2-0e6fd0fd1a-2245e50058.zip/node_modules/@types/node/",
           "packageDependencies": [
             ["@types/node", "npm:16.6.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/p5", [
+        ["npm:1.3.0", {
+          "packageLocation": "./.yarn/cache/@types-p5-npm-1.3.0-fefe7145da-01361083df.zip/node_modules/@types/p5/",
+          "packageDependencies": [
+            ["@types/p5", "npm:1.3.0"]
           ],
           "linkType": "HARD",
         }]
@@ -5371,6 +5381,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["nature-of-code", "workspace:."],
+            ["@types/p5", "npm:1.3.0"],
             ["p5", "npm:1.4.0"],
             ["parcel", "npm:2.0.0-rc.0"]
           ],

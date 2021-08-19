@@ -1,11 +1,19 @@
 import * as p5 from "p5";
 
-new p5((sketch) => {
-  sketch.setup = function () {
-    sketch.createCanvas(400, 400);
+let xOffset = 0;
+
+new p5((s) => {
+  s.setup = function () {
+    s.createCanvas(400, 400);
   };
 
-  sketch.draw = function () {
-    sketch.background(0);
+  s.draw = function () {
+    s.background(51);
+
+    const x = s.map(s.noise(xOffset), 0, 1, 0, s.width);
+
+    s.ellipse(x, 200, 24, 24);
+
+    xOffset += 0.01;
   };
 });
