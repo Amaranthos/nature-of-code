@@ -1,3 +1,12 @@
 {
-  "name": "nature-of-code"
+  "name": "nature-of-code",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "dependencies": {
+    "p5": "^1.4.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
 }
