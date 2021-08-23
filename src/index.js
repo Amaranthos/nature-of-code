@@ -1,7 +1,9 @@
 import * as p5 from "p5";
-import { Walker } from "./walker";
+import { Mover } from "./mover";
 
 new p5((s) => {
+  const mover = new Mover(s, s.width / 2, s.height / 2);
+
   s.windowResized = function () {
     s.resizeCanvas(window.innerWidth, window.innerHeight);
   };
@@ -12,16 +14,10 @@ new p5((s) => {
   };
 
   s.draw = function () {
-    s.background(0);
     s.translate(s.width / 2, s.height / 2);
+    s.background(0);
 
-    let pos = s.createVector(s.width / 2, s.height / 2);
-    let mouse = s.createVector(s.mouseX, s.mouseY);
-
-    let v = p5.Vector.sub(mouse, pos).normalize().mult(100);
-
-    s.strokeWeight(4);
-    s.stroke(255);
-    s.line(0, 0, v.x, v.y);
+    mover.update();
+    mover.draw();
   };
 });
