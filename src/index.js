@@ -1,8 +1,8 @@
 import * as p5 from "p5";
-import { Mover } from "./mover";
 
 new p5((s) => {
-  const mover = new Mover(s, s.width / 2, s.height / 2);
+  let pos;
+  let prev;
 
   s.windowResized = function () {
     s.resizeCanvas(window.innerWidth, window.innerHeight);
@@ -11,13 +11,26 @@ new p5((s) => {
   s.setup = function () {
     s.createCanvas(window.innerWidth, window.innerHeight);
     s.pixelDensity(1);
+    s.background(51);
+    pos = s.createVector(s.width / 2, s.height / 2);
+    prev = pos.copy();
   };
 
   s.draw = function () {
-    s.translate(s.width / 2, s.height / 2);
-    s.background(0);
+    s.stroke(255);
+    s.strokeWeight(2);
 
-    mover.update();
-    mover.draw();
+    s.line(pos.x, pos.y, prev.x, prev.y);
+    prev.set(pos);
+
+    const r = s.random(100);
+    const step = p5.Vector.random2D();
+    if (r < 1) {
+      step.mult(s.random(25, 100));
+    } else {
+      step.setMag(2);
+    }
+
+    pos.add(step);
   };
 });
