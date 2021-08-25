@@ -1,8 +1,10 @@
 import * as p5 from "p5";
+import { Mover } from "./mover";
 
 new p5((s) => {
-  let pos;
-  let prev;
+  const mover = new Mover(s, s.width / 2, s.height / 2);
+  const gravity = s.createVector(0, 0.1);
+  const wind = s.createVector(0.1, 0);
 
   s.windowResized = function () {
     s.resizeCanvas(window.innerWidth, window.innerHeight);
@@ -11,26 +13,20 @@ new p5((s) => {
   s.setup = function () {
     s.createCanvas(window.innerWidth, window.innerHeight);
     s.pixelDensity(1);
-    s.background(51);
-    pos = s.createVector(s.width / 2, s.height / 2);
-    prev = pos.copy();
   };
 
   s.draw = function () {
-    s.stroke(255);
-    s.strokeWeight(2);
+    s.translate(s.width / 2, s.height / 2);
+    s.background(0);
 
-    s.line(pos.x, pos.y, prev.x, prev.y);
-    prev.set(pos);
+    mover.applyForce(gravity);
 
-    const r = s.random(100);
-    const step = p5.Vector.random2D();
-    if (r < 1) {
-      step.mult(s.random(25, 100));
-    } else {
-      step.setMag(2);
+    if (s.mouseIsPressed) {
+      mover.applyForce(wind);
     }
 
-    pos.add(step);
+    mover.update();
+    mover.edges();
+    mover.draw();
   };
 });
