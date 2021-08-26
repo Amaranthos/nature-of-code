@@ -1,7 +1,8 @@
 import * as p5 from "p5";
 
-export const Mover = function (s, x, y) {
+export const Mover = function (s, x, y, r) {
   this.s = s;
+  this.r = r;
   this.pos = s.createVector(x, y);
   this.vel = s.createVector();
   this.acc = s.createVector();
@@ -14,22 +15,22 @@ export const Mover = function (s, x, y) {
 
   this.edges = function () {
     const halfHeight = s.height / 2;
-    if (this.pos.y > halfHeight) {
-      this.pos.y = halfHeight;
+    if (this.pos.y > halfHeight - this.r) {
+      this.pos.y = halfHeight - this.r;
       this.vel.y *= -1;
     }
-    if (this.pos.y < -halfHeight) {
-      this.pos.y = -halfHeight;
+    if (this.pos.y < -halfHeight + this.r) {
+      this.pos.y = -halfHeight + this.r;
       this.vel.y *= -1;
     }
 
     const halfWidth = s.width / 2;
-    if (this.pos.x > halfWidth) {
-      this.pos.x = halfWidth;
+    if (this.pos.x > halfWidth - this.r) {
+      this.pos.x = halfWidth - this.r;
       this.vel.x *= -1;
     }
-    if (this.pos.x < -halfWidth) {
-      this.pos.x = -halfWidth;
+    if (this.pos.x < -halfWidth + this.r) {
+      this.pos.x = -halfWidth + this.r;
       this.vel.x *= -1;
     }
   };
@@ -42,6 +43,6 @@ export const Mover = function (s, x, y) {
     this.s.stroke(255);
     this.s.strokeWeight(2);
     this.s.fill(255, 100);
-    this.s.ellipse(this.pos.x, this.pos.y, 32);
+    this.s.circle(this.pos.x, this.pos.y, r * 2);
   };
 };

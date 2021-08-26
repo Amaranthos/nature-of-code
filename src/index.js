@@ -2,7 +2,7 @@ import * as p5 from "p5";
 import { Mover } from "./mover";
 
 new p5((s) => {
-  const mover = new Mover(s, s.width / 2, s.height / 2);
+  const mover = new Mover(s, s.width / 2, s.height / 2, 32);
   const gravity = s.createVector(0, 0.1);
   const wind = s.createVector(0.1, 0);
 
