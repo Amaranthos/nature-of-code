@@ -1,11 +1,14 @@
 import * as p5 from "p5";
 
-export const Mover = function (s, x, y, r) {
+export const Mover = function (s, x, y, m) {
   this.s = s;
-  this.r = r;
+  this.mass = m;
+  this.r = s.sqrt(this.mass) * 10;
   this.pos = s.createVector(x, y);
   this.vel = s.createVector();
   this.acc = s.createVector();
+
+  console.log(x, y);
 
   this.update = function () {
     this.vel.add(this.acc);
@@ -36,13 +39,13 @@ export const Mover = function (s, x, y, r) {
   };
 
   this.applyForce = function (force) {
-    this.acc.add(force);
+    this.acc.add(force.copy().div(this.mass));
   };
 
   this.draw = function () {
     this.s.stroke(255);
     this.s.strokeWeight(2);
     this.s.fill(255, 100);
-    this.s.circle(this.pos.x, this.pos.y, r * 2);
+    this.s.circle(this.pos.x, this.pos.y, this.r * 2);
   };
 };
