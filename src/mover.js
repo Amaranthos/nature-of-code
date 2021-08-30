@@ -2,13 +2,11 @@ import * as p5 from "p5";
 
 export const Mover = function (s, x, y, m) {
   this.s = s;
-  this.mass = m;
-  this.r = s.sqrt(this.mass) * 10;
   this.pos = s.createVector(x, y);
   this.vel = s.createVector();
   this.acc = s.createVector();
-
-  console.log(x, y);
+  this.mass = m;
+  this.r = s.sqrt(this.mass) * 10;
 
   this.update = function () {
     this.vel.add(this.acc);
@@ -39,7 +37,17 @@ export const Mover = function (s, x, y, m) {
   };
 
   this.applyForce = function (force) {
-    this.acc.add(force.copy().div(this.mass));
+    this.acc.add(p5.Vector.div(force, this.mass));
+  };
+
+  this.friction = function (mu = 0.1) {
+    const diff = s.height / 2 - (this.pos.y + this.r);
+    if (diff < 1) {
+      let friction = this.vel.copy().normalize().mult(-1);
+      const normal = this.mass;
+      friction.setMag(mu * normal);
+      this.applyForce(friction);
+    }
   };
 
   this.draw = function () {
