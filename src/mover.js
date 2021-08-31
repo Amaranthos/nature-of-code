@@ -50,6 +50,13 @@ export const Mover = function (s, x, y, m) {
     }
   };
 
+  this.drag = function (c = 0.1) {
+    let drag = this.vel.copy().normalize().mult(-1);
+    const speedSq = this.vel.magSq();
+    drag.setMag(speedSq * c);
+    this.applyForce(drag);
+  };
+
   this.draw = function () {
     this.s.stroke(255);
     this.s.strokeWeight(2);

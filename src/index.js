@@ -33,6 +33,10 @@ new p5((s) => {
     s.translate(s.width / 2, s.height / 2);
     s.background(0);
 
+    s.fill(255, 50);
+    s.noStroke();
+    s.rect(-s.width / 2, s.height / 4, s.width, s.height / 4);
+
     movers.forEach((m) => {
       m.applyForce(p5.Vector.mult(gravity, m.mass));
 
@@ -40,6 +44,9 @@ new p5((s) => {
         m.applyForce(wind);
       }
 
+      if (m.pos.y > s.height / 4) {
+        m.drag(0.1);
+      }
       m.friction();
       m.update();
       m.edges();
