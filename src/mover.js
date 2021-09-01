@@ -1,12 +1,11 @@
 import * as p5 from "p5";
 
 export const Mover = function (s, x, y, m) {
-  this.s = s;
   this.pos = s.createVector(x, y);
-  this.vel = s.createVector();
+  this.vel = p5.Vector.random2D().mult(5);
   this.acc = s.createVector();
   this.mass = m;
-  this.r = s.sqrt(this.mass) * 10;
+  this.r = s.sqrt(this.mass) * 2;
 
   this.update = function () {
     this.vel.add(this.acc);
@@ -58,9 +57,9 @@ export const Mover = function (s, x, y, m) {
   };
 
   this.draw = function () {
-    this.s.stroke(255);
-    this.s.strokeWeight(2);
-    this.s.fill(255, 100);
-    this.s.circle(this.pos.x, this.pos.y, this.r * 2);
+    s.stroke(255);
+    s.strokeWeight(2);
+    s.fill(255, 100);
+    s.circle(this.pos.x, this.pos.y, this.r * 2);
   };
 };

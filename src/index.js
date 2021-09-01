@@ -1,13 +1,17 @@
 import * as p5 from "p5";
 import { Mover } from "./mover";
+import { Attractor } from "./attractor";
 
 const moverCount = 10;
-const moverMaxWeight = 8;
+const moverMaxWeight = 50;
+const attractorCount = 1;
+const attractorMaxWeight = 50;
+
+const G = 5;
 
 new p5((s) => {
   const movers = [];
-  const gravity = s.createVector(0, 0.2);
-  const wind = s.createVector(0.1, 0);
+  const attractors = [];
 
   let cW = window.innerWidth / 2;
   let cH = window.innerHeight / 2;
@@ -21,36 +25,30 @@ new p5((s) => {
   s.setup = function () {
     s.createCanvas(window.innerWidth, window.innerHeight);
     s.pixelDensity(1);
+    s.background(0);
 
     for (let idx = 0; idx < moverCount; idx++) {
-      movers.push(
-        new Mover(s, s.random(-cW, cW), 0, s.random(1, moverMaxWeight))
-      );
+      movers.push(new Mover(s, s.random(-cW, cW), s.random(-cW, cW), 50));
+    }
+    for (let idx = 0; idx < attractorCount; idx++) {
+      attractors.push(new Attractor(s, 0, 0, 50));
     }
   };
 
   s.draw = function () {
     s.translate(s.width / 2, s.height / 2);
-    s.background(0);
-
-    s.fill(255, 50);
-    s.noStroke();
-    s.rect(-s.width / 2, s.height / 4, s.width, s.height / 4);
+    s.background(0, 5);
 
     movers.forEach((m) => {
-      m.applyForce(p5.Vector.mult(gravity, m.mass));
-
-      if (s.mouseIsPressed) {
-        m.applyForce(wind);
-      }
-
-      if (m.pos.y > s.height / 4) {
-        m.drag(0.1);
-      }
-      m.friction();
       m.update();
-      m.edges();
       m.draw();
+    });
+
+    attractors.forEach((a) => {
+      movers.forEach((m) => {
+        a.attract(m, G);
+      });
+      a.draw();
     });
   };
 });
